@@ -109,8 +109,8 @@ term `-secondary` in the initial storage URL.
     tier using the Set Blob Tier operation.
 - When you rehydrate a blob, you can set the priority for the rehydration operation via the optional x-ms-rehydrate-priority 
   header on a Set Blob Tier or Copy Blob/Copy Blob From URL operation. Rehydration priority options include:
-  - Standard priority: The rehydration request will be processed in the order it was received and may take up to 15 hours
-  - High priority: The rehydration request will be prioritized over standard priority requests and may complete in under one hour
+  - **Standard priority**: The rehydration request will be processed in the order it was received and may take up to 15 hours
+  - **High priority**: The rehydration request will be prioritized over standard priority requests and may complete in under one hour
     for objects under 10 GB in size
 - When you copy an archived blob to a new blob an online tier, the source blob remains unmodified in the archive tier. You must
   copy the archived blob to a new blob with a different name or to a different container. You cannot overwrite the 
