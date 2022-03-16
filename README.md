@@ -106,3 +106,11 @@ term `-secondary` in the initial storage URL.
 - on the container level we can add access policies:
   - **Legal Hold** -> the images cannot be modified or deleted as long as there are some tags set on them
   - **Time-based retention** -> the images cannot be modified or deleted for a specified number of days
+
+## Moving items between Storage accounts and Containers
+- Azure CLI
+- AzCopy (powershell)
+- Using a client (Java)
+![copy_blobs.png](copy_blobs.png)
+ 
+![copy_a_container.png](copy_a_container.png)
