@@ -63,3 +63,46 @@ term `-secondary` in the initial storage URL.
 ![LRS_and_ZRS.png](LRS_and_ZRS.png)
 
 ![GRS_and_GZRS.png](GRS_and_GZRS.png)
+
+## Properties and Metadata
+- exist both on Containers and Blobs
+- System properties:
+  - Container: ETag, LastModified
+  - Blob: ETag, LastModified, Content-Type, Content-Length, x-ms-blob-type
+- USer-defined metadata
+  - Container & Blob: String-based key-value pairs
+
+## Data archiving and Retention
+### Access tiers
+- Hot - > Default (frequently accessed data)
+- Cool -> infrequently accessed data stored for at least 30 days
+- Archive -> data that can be archived for at least 180 days
+![costs_per_access_tier.png](costs_per_access_tier.png)
+
+- the access tier is set at the account level (only **Hot** and **Cool**), and it is then inferred/inherited at blob level
+- it can also be set at blob level (**Hot**, **Cool** and **Archive**) 
+- once the blob has been moved to the **Archived** access tier, it can't be accessed online anymore. In order to access
+  it again, it has to be moved to **Hot** or **Cool**. This process is called **Rehydrating** and it can take 
+  up to several hours
+- rules can be set to delete blobs or to move them to the Cool or Archive tiers, if they haven't been accessed in 
+  a number of days. Additional filters can be specified (e.g. move only blobs with a specific prefix)
+- rules are applied once per day by Azure nad can be enabled/disabled
+
+### Soft deletes
+- we have the option to enable soft deletes for both Containers and Blobs
+- the blob/container is kept for a specified number of days, after being soft deleted
+- after a soft delete, it can be **undeleted**, using the **undelete** option
+
+### Versions and snapshots
+- to use versioning, it has to be enabled at account level, in the Data protection tab under the Data management section
+- versions can be restored as defaults
+
+### Leases
+- leases work like a lock
+- we can acquire a lease for a blob
+- once the lease has been acquired, the blob cannot be deleted or edited without the lease id
+
+### Immutable blob storage
+- on the container level we can add access policies:
+  - **Legal Hold** -> the images cannot be modified or deleted as long as there are some tags set on them
+  - **Time-based retention** -> the images cannot be modified or deleted for a specified number of days
